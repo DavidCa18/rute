@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar color="celeste" style="text-align: center">
+    <ion-title>Estudiantes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <label class="w3-text-blue" style="font-weight: bold">Seleccionar Periodo Lectivo</label><br>
+  <select [(ngModel)]="periodo" class="w3-input w3-border w3-round-large">
+    <option value="2019-2020">2019-2020</option>
+    <option value="2018-2019">2018-2019</option>
+    <option value="2017-2018">2017-2018</option>
+  </select>
+  <br>
+  <label class="w3-text-blue" style="font-weight: bold">Estudiante/s</label>
+  <ul *ngIf="lstEstudiantes.length == 0" class="w3-ul w3-card-4 w3-hoverable w3-border w3-round-large">
+    <li class="w3-bar">
+      <img src="../../assets/imgs/lista-vacia.png" class="w3-bar-item" width="64" height="64">
+      <div class="w3-bar-item">
+        <span class="w3-large">Estudiantes</span><br>
+        <span>Lista Vacía.</span>
+      </div>
+    </li>
+  </ul>
+  <ul class="w3-ul w3-card-4 w3-hoverable w3-border w3-round-large">
+    <li *ngFor="let estudiantes of lstEstudiantes" class="w3-bar"
+      (click)="buscarEstudianteUbicacionActual(estudiantes)">
+      <img src="{{estudiantes.foto}}" class="w3-bar-item w3-circle" width="64" height="64">
+      <div class="w3-bar-item">
+        <span class="w3-large">{{estudiantes.nombre}}</span><br>
+        <span>{{estudiantes.curso}}</span>
+      </div>
+    </li>
+  </ul>
+  <br>
+  <label class="w3-text-blue" style="font-weight: bold">Visualizando Estudiante:</label>
+  <span>{{estudianteVisualizado}}</span>
+  <!--<br>
+  <label class="w3-text-blue" style="font-weight: bold">Distancia al Destino (M): </label>
+  <span>{{ convertirKMaM(distancia)}}m</span>-->
+  <br>
+  <div id="map" style="width: 100%; height: 80%"></div>
+  <ion-fab *ngIf="estadoVisualizacion" bottom left>
+    <button ion-fab color="danger" (click)="pararPosicion()">
+      <ion-icon name="md-hand"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

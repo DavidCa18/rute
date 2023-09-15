@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+  <title>RUTE</title>
+
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+    type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css" />
+  <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet" />
+  <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+  <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+  <link href="../../css/style.css" rel="stylesheet" />
+  <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+
+  <link href="../../plugins/kendo-ui/css/kendo.common-nova.min.css" rel="stylesheet" />
+  <link href="../../plugins/kendo-ui/css/kendo.nova.min.css" rel="stylesheet" />
+  <link href="../../plugins/kendo-ui/css/kendo.nova.mobile.min.css" rel="stylesheet" />
+
+  <link href="../../plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
+  <style>
+    div.k-edit-form-container {
+      width: 550px;
+    }
+
+    .k-popup-edit-form .k-edit-label {
+      width: 20%;
+      text-align: left;
+    }
+
+    .k-popup-edit-form .k-edit-field>.k-textbox,
+    .k-popup-edit-form .k-edit-field>.k-widget:not(.k-tooltip) {
+      width: 98%;
+    }
+
+    .k-button.k-grid-update {
+      background: white;
+    }
+
+    .k-button.k-grid-cancel {
+      border-color: white;
+      color: white;
+    }
+
+    .product-view {
+      float: left;
+      width: 50%;
+      height: 500px;
+      box-sizing: border-box;
+      border-top: 0;
+      position: relative;
+    }
+
+    .product-view:nth-child(even) {
+      border-left-width: 0;
+    }
+
+    .product-view dl {
+      margin: 10px 10px 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .product-view dt,
+    dd {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      line-height: 24px;
+      font-size: 18px;
+    }
+
+    .product-view dt {
+      font-size: 11px;
+      height: 16px;
+      line-height: 16px;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    .product-view dd {
+      height: 46px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .product-view dd .k-widget,
+    .product-view dd .k-textbox {
+      font-size: 14px;
+    }
+
+    #example .k-listview {
+      border-width: 1px 0 0;
+      padding: 0;
+      overflow: hidden;
+      min-height: 298px;
+    }
+
+    .edit-buttons {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: right;
+      padding: 5px;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .k-pager-wrap {
+      border-top: 0;
+    }
+
+    span.k-invalid-msg {
+      position: absolute;
+      margin-left: 6px;
+    }
+
+    .k-add-button {
+      margin-bottom: 2em;
+    }
+
+    .customer-photo {
+      display: inline-block;
+      box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0, 0, 0, .2);
+      margin: 0 10px 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      vertical-align: middle;
+    }
+
+    @media only screen and (max-width: 620px) {
+      .product-view {
+        width: 100%;
+      }
+
+      .product-view:nth-child(even) {
+        border-left-width: 1px;
+      }
+    }
+
+    .dropdown-header {
+      border-width: 0 0 1px 0;
+      text-transform: uppercase;
+    }
+
+    .dropdown-header>span {
+      display: inline-block;
+      padding: 10px;
+    }
+
+    .dropdown-header>span:first-child {
+      width: 50px;
+    }
+
+    .k-list-container>.k-footer {
+      padding: 10px;
+    }
+
+    .selected-value {
+      display: inline-block;
+      vertical-align: middle;
+      width: 18px;
+      height: 18px;
+      background-size: 100%;
+      margin-right: 5px;
+      border-radius: 50%;
+    }
+
+    #customers-list .k-item {
+      line-height: 1em;
+      min-width: 300px;
+    }
+
+    /* Material Theme padding adjustment*/
+
+    .k-material #customers-list .k-item,
+    .k-material #customers-list .k-item.k-state-hover,
+    .k-materialblack #customers-list .k-item,
+    .k-materialblack #customers-list .k-item.k-state-hover {
+      padding-left: 5px;
+      border-left: 0;
+    }
+
+    #customers-list .k-item>span {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      display: inline-block;
+      vertical-align: top;
+      margin: 20px 10px 10px 5px;
+    }
+
+    #customers-list .k-item>span:first-child {
+      -moz-box-shadow: inset 0 0 30px rgba(0, 0, 0, .3);
+      -webkit-box-shadow: inset 0 0 30px rgba(0, 0, 0, .3);
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, .3);
+      margin: 10px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
+
+    #customers-list h3 {
+      font-size: 1.2em;
+      font-weight: normal;
+      margin: 0 0 1px 0;
+      padding: 0;
+    }
+
+    #customers-list p {
+      margin: 0;
+      padding: 0;
+      font-size: .8em;
+    }
+
+    .k-grid {
+      text-transform: uppercase
+    }
+
+    input {
+      text-transform: uppercase
+    }
+  </style>
+</head>
+
+<body class="theme-red">
+  <!-- Top Bar -->
+  <nav class="navbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="javascript:void(0);" class="bars"></a>
+        <a class="navbar-brand" href="/adminIndex">RUTAS ESCOLARES</a>
+      </div>
+    </div>
+  </nav>
+  <!-- #Top Bar -->
+  <section>
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+      <!-- User Info -->
+      <div class="user-info">
+        <div class="image">
+          <img src="../../images/user.png" width="48" height="48" alt="User" />
+        </div>
+        <div class="info-container">
+          <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Usuario en Sesion
+          </div>
+          <div class="email">Correo Electronico</div>
+          <div class="btn-group user-helper-dropdown">
+            <i class="material-icons" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="true">keyboard_arrow_down</i>
+            <ul class="dropdown-menu pull-right">
+              <li>
+                <a href="/adminPerfil"><i class="material-icons">person</i>Perfil</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href=""><i class="material-icons">input</i>Cerrar Sesión</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu">
+        <ul class="list">
+          <li class="header">OPCIONES</li>
+
+
+          <li>
+            <a href="/adminConductores">
+              <i class="material-icons">airline_seat_recline_normal</i>
+              <span>Conductores</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminEstudiantes">
+              <i class="material-icons">face</i> <span>Estudiante</span>
+            </a>
+          </li>
+
+          <li class="active">
+            <a href="/adminRepresentantes">
+              <i class="material-icons">home</i> <span>Representantes</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminVehiculos">
+              <i class="material-icons">directions_bus</i>
+              <span>Vehículos</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminRutas">
+              <i class="material-icons">swap_calls</i>
+              <span>Ruta</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="javascript:void(0);" class="menu-toggle">
+              <i class="material-icons">call_split</i>
+              <span>Asignaciones</span>
+            </a>
+            <ul class="ml-menu">
+              <li>
+                <a href="/adminRepresentanteEstudiante">
+                  Representante a Estudiante</a>
+              </li>
+              <li>
+                <a href="/adminConductorVehiculo"> Conductor a Vehículo</a>
+              </li>
+              <li>
+                <a href="/adminEstudianteVehiculo"> Estudiante a Vehículo</a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li>
+            <a href="/adminUsuarios">
+              <i class="material-icons">person</i> <span>Usuarios</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="legal">
+        <div class="copyright">
+          &copy; 2020 <a>Rutas de Transporte Escolar</a>.
+        </div>
+        
+      </div>
+    </aside>
+  </section>
+
+  <section class="content">
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>GESTION REPRESENTANTES</h2>
+          </div>
+          <div class="body">
+            <h2 class="card-inside-title">
+              Registro, Modificación y Eliminación || Representantes
+            </h2>
+
+            <div id="grid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal fade " id="asignacionDireccion" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content modal-col-red">
+        <div class="modal-header">
+          <h4 class="modal-title" id="defaultModalLabel">Gestionar la Asignación de Direcciones a los Representantes
+          </h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+
+            <div class="col-md-6">
+              <h4>Representante</h4>
+              <label>Representante: </label> <span id="idRepresentanteAsig">OSCAR RIVERA</span>
+              <hr>
+              <div id="direccionesDireccionRepresentante_">
+              </div>
+              <input style="display: none;" type="text" name="listaRepresentantes" id="listaRepresentantes">
+            </div>
+
+            <div class="col-md-6">
+              <h4>Gestión Direcciones</h4>
+              <div>
+                <div class="panel-group">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse1">Agregar y Asignar Dirección <b
+                            style="float: right;">+</b> </a>
+                      </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                      <div class="panel-body">
+
+                        <form id="fmrDireccion_" method="POST">
+                          <div class="form-group form-float">
+                            <div class="form-line">
+                              <input type="text" class="form-control" name="callePrincipal" required>
+                              <label class="form-label">Calle Principal</label>
+                            </div>
+                          </div>
+                          <div class="form-group form-float">
+                            <div class="form-line">
+                              <input type="text" class="form-control" name="calleSecundaria" required>
+                              <label class="form-label">Calle Secundaria</label>
+                            </div>
+                          </div>
+                          <div class="form-group form-float">
+                            <div class="form-line">
+                              <input type="text" class="form-control" name="numeroCasa" required>
+                              <label class="form-label">Número de Casa</label>
+                            </div>
+                          </div>
+                          <div class="form-group form-float">
+                            <div class="form-line">
+                              <input type="text" class="form-control" name="barrio" required>
+                              <label class="form-label">Barrio</label>
+                            </div>
+                          </div>
+                          <div class="form-group form-float">
+                            <div class="form-line">
+                              <input type="text" class="form-control" name="zona" required>
+                              <label class="form-label">Zona</label>
+                            </div>
+                          </div>
+                          <div class="form-group form-float">
+                            <div class="form-line">
+                              <input type="number" class="form-control" id="latitud" name="latitud" value="-0.213814"
+                                required>
+                              <label class="form-label">Latitud</label>
+                            </div>
+                          </div>
+                          <div class="form-group form-float">
+                            <div class="form-line">
+                              <input type="number" class="form-control" id="longitud" name="longitud" value="-78.504127"
+                                required>
+                              <label class="form-label">Longitud</label>
+                            </div>
+                          </div>
+                          <button class="btn btn-primary waves-effect" type="submit"
+                            id="guardarDireccionRepresentante">Guardar Dirección</button>
+                        </form>
+                      </div>
+                      <div>
+                        <div id="map" style="width: 100%; height: 500px;"></div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+  <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+  <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+  <script src="../../plugins/node-waves/waves.js"></script>
+  <script src="../../js/admin.js"></script>
+  <script src="../../js/demo.js"></script>
+
+  <script src="../../plugins/kendo-ui/js/kendo.all.min.js"></script>
+  <script src="../../plugins/kendo-ui/js/kendo.messages.es-EC.min.js"></script>
+
+  <script src="../../plugins/sweetalert/sweetalert.min.js"></script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWVEScNll7PFoAnItsNGnFG_ogFZzEPBU&callback=mapa" async
+    defer></script>
+
+  <script>
+
+    function digitoVerificador(cedula) {
+      var estado = true;
+      //Preguntamos si la cedula consta de 10 digitos
+      if (cedula.length == 10) {
+
+        //Obtenemos el digito de la region que sonlos dos primeros digitos
+        var digito_region = cedula.substring(0, 2);
+
+        //Pregunto si la region existe ecuador se divide en 24 regiones
+        if (digito_region >= 1 && digito_region <= 24) {
+
+          // Extraigo el ultimo digito
+          var ultimo_digito = cedula.substring(9, 10);
+
+          //Agrupo todos los pares y los sumo
+          var pares = parseInt(cedula.substring(1, 2)) + parseInt(cedula.substring(3, 4)) + parseInt(cedula.substring(5, 6)) + parseInt(cedula.substring(7, 8));
+
+          //Agrupo los impares, los multiplico por un factor de 2, si la resultante es > que 9 le restamos el 9 a la resultante
+          var numero1 = cedula.substring(0, 1);
+          var numero1 = (numero1 * 2);
+          if (numero1 > 9) { var numero1 = (numero1 - 9); }
+
+          var numero3 = cedula.substring(2, 3);
+          var numero3 = (numero3 * 2);
+          if (numero3 > 9) { var numero3 = (numero3 - 9); }
+
+          var numero5 = cedula.substring(4, 5);
+          var numero5 = (numero5 * 2);
+          if (numero5 > 9) { var numero5 = (numero5 - 9); }
+
+          var numero7 = cedula.substring(6, 7);
+          var numero7 = (numero7 * 2);
+          if (numero7 > 9) { var numero7 = (numero7 - 9); }
+
+          var numero9 = cedula.substring(8, 9);
+          var numero9 = (numero9 * 2);
+          if (numero9 > 9) { var numero9 = (numero9 - 9); }
+
+          var impares = numero1 + numero3 + numero5 + numero7 + numero9;
+
+          //Suma total
+          var suma_total = (pares + impares);
+
+          //extraemos el primero digito
+          var primer_digito_suma = String(suma_total).substring(0, 1);
+
+          //Obtenemos la decena inmediata
+          var decena = (parseInt(primer_digito_suma) + 1) * 10;
+
+          //Obtenemos la resta de la decena inmediata - la suma_total esto nos da el digito validador
+          var digito_validador = decena - suma_total;
+
+          //Si el digito validador es = a 10 toma el valor de 0
+          if (digito_validador == 10)
+            var digito_validador = 0;
+
+          //Validamos que el digito validador sea igual al de la cedula
+          if (digito_validador == ultimo_digito) {
+            estado = true;
+            console.log('la cedula:' + cedula + ' es correcta');
+          } else {
+            estado = false;
+            console.log('la cedula:' + cedula + ' es incorrecta');
+          }
+
+        } else {
+          // imprimimos en consola si la region no pertenece
+          estado = false;
+          console.log('Esta cedula no pertenece a ninguna region');
+        }
+      } else {
+        //imprimimos en consola si la cedula tiene mas o menos de 10 digitos
+        console.log('Esta cedula tiene menos de 10 Digitos');
+        estado = false;
+      }
+
+      return estado;
+    }
+
+
+    GestionRepresentantes();
+
+    function GestionRepresentantes() {
+      dataSource = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: "/buscarRepresentante",
+            dataType: "json",
+            type: "GET"
+          },
+          update: {
+            url: "/modificarRepresentante",
+            dataType: "json",
+            type: "POST"
+          },
+          destroy: {
+            url: "/eliminarRepresentante",
+            dataType: "json",
+            type: "POST"
+          },
+          create: {
+            url: "/guardarRepresentante",
+            dataType: "json",
+            type: "POST",
+            complete: function (e) {
+              $("#grid").data("kendoGrid").dataSource.read();
+            }
+          },
+          parameterMap: function (options, operation) {
+            if (operation !== "read" && options.models) {
+              var datos = options.models[0];
+              return datos;
+            }
+          }
+        },
+        error: function (e) {
+          alert("No se puede eliminar ya que depende de otros registros");
+        },
+        batch: true,
+        pageSize: 20,
+        schema: {
+          model: {
+            id: "idRepresentante",
+            fields: {
+              idRepresentante: { editable: false, nullable: true },
+              identificacion: {
+                validation: {
+                  required: true,
+                 
+                  identificacionvalidation: function (input) {
+                    if (input.is("[name='identificacion']") && input.val() != "") {
+                      if (digitoVerificador(input.val()) == false) {
+                        input.attr("data-identificacionvalidation-msg", "Ingrese un Número de Cédula Válido");
+                        return false;
+                      }
+                    }
+                    return true;
+                  }
+                }
+              },
+              nombre: { validation: { required: true } },
+              telefono: { validation: { required: true } },
+              email: { validation: { required: true } },
+              direccion: { editable: false, nullable: true }
+            }
+          }
+        }
+      });
+
+      $("#grid").kendoGrid({
+        dataSource: dataSource,
+        pageable: true,
+        filterable: true,
+        height: 550,
+        toolbar: [
+          {
+            name: "create",
+            text: "REGISTRAR REPRESENTANTE"
+          }
+        ],
+        columns: [
+          {
+            field: "identificacion",
+            title: "Identificación",
+            width: "120px"
+          },
+          { field: "nombre", title: "Nombre", width: "200px" },
+          { field: "telefono", title: "Teléfono", width: "120px" },
+          {
+            field: "email",
+            title: "Correo Electrónico",
+            width: "300px"
+          },
+          {
+            field: "direccion",
+            title: "Direcciones",
+            width: "150px"
+          },
+          {
+            command: { text: "GESTIONAR DIRECCIONES", click: asignacionDireccion }, title: "&nbsp;", width: "180px"
+          },
+          {
+            command: ["edit", "destroy"],
+            title: "&nbsp;",
+            width: "200px"
+          }
+        ],
+        editable: { mode: "popup" },
+        edit: function (e) {
+          e.container.kendoWindow("title", "Gestión Representantes");
+        }
+      });
+    }
+
+    function mapa() {
+
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: -0.213814, lng: -78.504127 },
+        zoom: 12
+      });
+
+      marker = new google.maps.Marker({
+        map: map,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+        position: { lat: -0.213814, lng: -78.504127 }
+      });
+      google.maps.event.addListener(marker, 'dragend', function (a) {
+        var coodenada = a.latLng;
+        $("#latitud").val(coodenada.lat());
+        $("#longitud").val(coodenada.lng());
+      });
+    }
+
+    function toggleBounce() {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
+
+    function asignacionDireccion(e) {
+      e.preventDefault();
+      var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+      $("#listaRepresentantes").val(dataItem.idRepresentante);
+      buscarDireccionRepresentanteVisualizacion(dataItem.idRepresentante);
+      $("#idRepresentanteAsig").html(dataItem.nombre);
+
+      $('#asignacionDireccion').modal('show');
+    }
+
+
+    function buscarDireccionRepresentanteVisualizacion(valor) {
+      $.get("/buscarDireccionRepresentanteVisualizacion", { idRepresentante: valor })
+        .done(function (data) {
+
+          var htmlOut = "";
+          for (let i = 0; i < data.length; i++) {
+
+            htmlOut = htmlOut + " <h5>Dirección 1</h5> "
+              + " <label>Calle Principal: </label> <span>" + data[i].callePrincipal + "</span><br> "
+              + " <label>Calle Secundaria: </label> <span>" + data[i].calleSecundaria + "</span><br> "
+              + " <label>Número Casa: </label> <span>" + data[i].numeroCasa + "</span><br> "
+              + " <button class='btn btn-warning waves-effect' onclick='eliminarDireccionRepresentante(" + data[i].idRepresentanteDireccion + ")'>Eliminar</button> "
+              + " <hr>";
+          }
+
+          $('#direccionesDireccionRepresentante_').empty();
+          $('#direccionesDireccionRepresentante_').html(htmlOut);
+
+        }).fail(function (e) {
+          console.log(e);
+        });
+    }
+
+    $('#guardarDireccionRepresentante').click(function (e) {
+
+      e.preventDefault();
+      var data = $('#fmrDireccion_').serialize();
+
+      $.post("/guardarDireccion", data)
+        .done(function (value) {
+
+          var representante = $('#listaRepresentantes').val();
+          console.log(representante);
+          var datos = "(" + representante + "," + value.insertId + ",NOW(), '0')";
+
+          $.get("/guardarDireccionRepresentante", { data: datos })
+            .done(function (value) {
+
+              $("#fmrDireccion_")[0].reset();
+              buscarDireccionRepresentanteVisualizacion(representante);
+              swal("Exito!", "Se guardó y asignó la dirección al usuario", "success");
+
+            }).fail(function (e) {
+              swal("Error!", "No se logró guardar la asignación", "error");
+            });
+
+        }).fail(function (e) {
+          swal("Error!", "No se logró guardar la direccion", "error");
+        });
+    });
+
+    function eliminarDireccionRepresentante(id) {
+      $.post("/eliminarDireccionRepresentante", { idRepresentanteDireccion: id })
+        .done(function (data) {
+          var representante = $('#listaRepresentantes').val();
+          buscarDireccionRepresentanteVisualizacion(representante);
+          swal("Exito!", "Se eliminó la dirección asignada correctamente", "success");
+        }).fail(function (e) {
+          console.log(e);
+        });
+    }
+
+  </script>
+</body>
+
+</html>

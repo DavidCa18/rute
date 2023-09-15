@@ -1,0 +1,19 @@
+<ion-content padding class="background" style="text-align: center">
+  <br>
+  <img src="../assets/imgs/logoRute.png" alt="RUTE" style="width: 40%">
+  <br><br>
+  <div class="w3-round-xlarge background-datos">
+    <br><br>
+    <h3 class="w3-text-blue" style="text-align: center; font-weight: bold;">INICIO SESIÓN</h3>
+    <br>
+    <label class="w3-text-blue">Correo Electrónico</label><br>
+    <input class="w3-input w3-border w3-round-large" type="email" [(ngModel)]="usuario.email" placeholder="Ingresar Correo Electrónico">
+    <br>
+    <label class="w3-text-blue">Contraseña</label><br>
+    <input class="w3-input w3-border w3-round-large" type="password" [(ngModel)]="usuario.password" placeholder="Ingresar Contraseña">
+    <br><br>
+    <button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large w3-block" style="height: 40px;" (click)="inicioSesion()">Ingresar</button>
+    <br><br><br>
+  </div>
+
+</ion-content>

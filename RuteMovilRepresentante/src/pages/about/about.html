@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar color="celeste" style="text-align: center">
+    <ion-title>Notificaciones</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div>
+    <label class="w3-text-blue" style="font-weight: bold">Seleccionar Periodo Lectivo</label><br>
+    <select [(ngModel)]="periodo" class="w3-input w3-border w3-round-large">
+      <option value="2019-2020">2019-2020</option>
+      <option value="2018-2019">2018-2019</option>
+      <option value="2017-2018">2017-2018</option>
+    </select>
+  </div>
+  <br>
+  <div>
+    <label class="w3-text-blue" style="font-weight: bold">Seleccionar Estudiante</label><br>
+    <select [(ngModel)]="estudiante" class="w3-input w3-border w3-round-large" (ngModelChange)="buscarHistorial()">
+      <option *ngFor="let estudiante of lstEstudiantes" value="{{estudiante.idEstudiante}}">{{estudiante.nombre}}
+      </option>
+    </select>
+  </div>
+  <br>
+
+  <div *ngIf="lstRutas.length == 0">
+    <div class="notificacion">
+      <img src="../../assets/imgs/lista-vacia.png" class="w3-bar-item" width="30" height="30">
+      <div class="w3-bar-item">
+        <span class="w3-large">Historial</span><br>
+        <span>Lista Vacía.</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="lstRutas.length != 0">
+    <div *ngFor="let historial of lstRutas">
+      <div class="notificacion">
+        <img src="../../assets/imgs/notification.png" class="w3-bar-item" width="30" height="30">
+        Latitud: {{ historial.latitud }} <br>
+        Longitud: {{ historial.longitud }}
+      </div>
+      <br>
+    </div>
+  </div>
+  <br>
+
+</ion-content>

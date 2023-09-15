@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar color="celeste" style="text-align: center">
+    <ion-title>Navegación</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <label class="w3-text-blue" style="font-weight: bold">Seleccionar Periodo Lectivo</label><br>
+  <select [(ngModel)]="periodo" class="w3-input w3-border w3-round-large" (ngModelChange)="obtenerRutasConductor()">
+    <option value="2019-2020">2019-2020</option>
+    <option value="2018-2019">2018-2019</option>
+    <option value="2017-2018">2017-2018</option>
+  </select>
+  <br>
+  <div id="map" style="width: 100%; height: 80%"></div>
+  <ion-scroll scrollY="true" style="width: 100% !important; height: 80% !important">
+    <div padding-horizontal id="panel"></div>
+  </ion-scroll>
+  <ion-fab bottom left>
+    <button ion-fab color="danger" (click)="calcularRuta()">
+      <ion-icon name="ios-share"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

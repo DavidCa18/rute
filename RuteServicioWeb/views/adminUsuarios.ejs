@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+  <title>RUTE</title>
+
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+    type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css" />
+  <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet" />
+  <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+  <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+  <link href="../../css/style.css" rel="stylesheet" />
+  <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+
+  <link href="../../plugins/kendo-ui/css/kendo.common-nova.min.css" rel="stylesheet" />
+  <link href="../../plugins/kendo-ui/css/kendo.nova.min.css" rel="stylesheet" />
+  <link href="../../plugins/kendo-ui/css/kendo.nova.mobile.min.css" rel="stylesheet" />
+
+  <style>
+    div.k-edit-form-container {
+      width: 550px;
+    }
+
+    .k-popup-edit-form .k-edit-label {
+      width: 20%;
+      text-align: left;
+    }
+
+    .k-popup-edit-form .k-edit-field>.k-textbox,
+    .k-popup-edit-form .k-edit-field>.k-widget:not(.k-tooltip) {
+      width: 98%;
+    }
+
+    .k-button.k-grid-update {
+      background: white;
+    }
+
+    .k-button.k-grid-cancel {
+      border-color: white;
+      color: white;
+    }
+  </style>
+</head>
+
+<body class="theme-red">
+  <!-- Top Bar -->
+  <nav class="navbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="javascript:void(0);" class="bars"></a>
+        <a class="navbar-brand" href="/adminIndex">RUTAS ESCOLARES</a>
+      </div>
+    </div>
+  </nav>
+  <!-- #Top Bar -->
+  <section>
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+      <!-- User Info -->
+      <div class="user-info">
+        <div class="image">
+          <img src="../../images/user.png" width="48" height="48" alt="User" />
+        </div>
+        <div class="info-container">
+          <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Usuario en Sesion
+          </div>
+          <div class="email">Correo Electronico</div>
+          <div class="btn-group user-helper-dropdown">
+            <i class="material-icons" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="true">keyboard_arrow_down</i>
+            <ul class="dropdown-menu pull-right">
+              <li>
+                <a href="/adminPerfil"><i class="material-icons">person</i>Perfil</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href=""><i class="material-icons">input</i>Cerrar Sesión</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu">
+        <ul class="list">
+          <li class="header">OPCIONES</li>
+
+
+          <li>
+            <a href="/adminConductores">
+              <i class="material-icons">airline_seat_recline_normal</i>
+              <span>Conductores</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminEstudiantes">
+              <i class="material-icons">face</i> <span>Estudiante</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminRepresentantes">
+              <i class="material-icons">home</i> <span>Representantes</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminVehiculos">
+              <i class="material-icons">directions_bus</i>
+              <span>Vehículos</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminRutas">
+              <i class="material-icons">swap_calls</i>
+              <span>Ruta</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="javascript:void(0);" class="menu-toggle">
+              <i class="material-icons">call_split</i>
+              <span>Asignaciones</span>
+            </a>
+            <ul class="ml-menu">
+              <li>
+                <a href="/adminRepresentanteEstudiante">
+                  Representante a Estudiante</a>
+              </li>
+              <li>
+                <a href="/adminConductorVehiculo"> Conductor a Vehículo</a>
+              </li>
+              <li>
+                <a href="/adminEstudianteVehiculo"> Estudiante a Vehículo</a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="active">
+            <a href="/adminUsuarios">
+              <i class="material-icons">person</i> <span>Usuarios</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="legal">
+        <div class="copyright">
+          &copy; 2020 <a>Rutas de Transporte Escolar</a>.
+        </div>
+        
+      </div>
+    </aside>
+  </section>
+
+  <section class="content">
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>GESTION USUARIOS</h2>
+          </div>
+          <div class="body">
+            <h2 class="card-inside-title">
+              Registro, Modificación y Eliminación || Usuarios
+            </h2>
+
+            <div id="grid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+  <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+  <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+  <script src="../../plugins/node-waves/waves.js"></script>
+  <script src="../../js/admin.js"></script>
+  <script src="../../js/demo.js"></script>
+
+  <script src="../../plugins/kendo-ui/js/kendo.all.min.js"></script>
+  <script src="../../plugins/kendo-ui/js/kendo.messages.es-EC.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      var rol = [
+        {
+          value: "CONDUCTOR",
+          text: "CONDUCTOR"
+        },
+        {
+          value: "REPRESENTANTE",
+          text: "REPRESENTANTE"
+        },
+        {
+          value: "ADMINISTRADOR",
+          text: "ADMINISTRADOR"
+        },
+        {
+          value: "ESTUDIANTE",
+          text: "ESTUDIANTE"
+        }
+      ];
+
+      dataSource = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: "/buscarUsuario",
+            dataType: "json",
+            type: "GET"
+          },
+          update: {
+            url: "/modificarUsuario",
+            dataType: "json",
+            type: "POST"
+          },
+          destroy: {
+            url: "/eliminarUsuario",
+            dataType: "json",
+            type: "POST"
+          },
+          create: {
+            url: "/guardarUsuario",
+            dataType: "json",
+            type: "POST"
+          },
+          parameterMap: function (options, operation) {
+            if (operation !== "read" && options.models) {
+              var datos = options.models[0];
+              return datos;
+            }
+          }
+        },
+        error: function (e) {
+          alert("Error al Gestionar Módulo");
+        },
+        batch: true,
+        pageSize: 20,
+        schema: {
+          model: {
+            id: "idUsuario",
+            fields: {
+              idUsuario: { editable: false, nullable: true },
+              email: { validation: { required: true, type: "email" } },
+              password: {
+                validation: {
+                  required: true,
+                  passwordvalidation: function (input) {
+                    if (input.is("[name='password']") && input.val() != "") {
+                      input.attr("data-passwordvalidation-msg", "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. NO puede tener otros símbolos.");
+                      return /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(input.val());
+                    }
+
+                    return true;
+                  }
+                }
+              },
+              rol: { validation: { required: true } }
+            }
+          }
+        }
+      });
+
+      $("#grid").kendoGrid({
+        dataSource: dataSource,
+        pageable: true,
+        height: 550,
+        toolbar: ["create"],
+        columns: [
+          { field: "email", title: "Correo Electrónico", width: "120px" },
+          { field: "password", title: "Contraseña", editor: passwordEditor, template: "**********", width: "120px" },
+          { field: "rol", values: rol, title: "Rol", width: "160px" },
+
+          { command: ["edit", "destroy"], title: "&nbsp;", width: "200px" }
+        ],
+        editable: "popup",
+        edit: function (e) {
+          e.container.kendoWindow("title", "Gestión Usuarios");
+        }
+      });
+
+      function passwordEditor(container, options) {
+        $(
+          '<input type="password" name="password" id="password" class="k-input k-textbox" required data-bind="value:' +
+          options.field +
+          '"/>'
+        ).appendTo(container);
+      }
+    });
+  </script>
+</body>
+
+</html>

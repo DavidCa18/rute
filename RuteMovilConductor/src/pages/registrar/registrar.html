@@ -1,0 +1,47 @@
+<ion-content padding class="background" style="text-align: center">
+    <br>
+    <img src="../assets/imgs/logoRute.png" alt="RUTE" style="width: 40%">
+    <br><br>
+    <div class="w3-round-xlarge background-datos">
+      <br><br>
+      <h3 class="w3-text-blue" style="text-align: center; font-weight: bold;">REGISTRO CONDUCTOR</h3>
+      <br>
+      <label class="w3-text-blue">Identificación</label><br>
+      <input class="w3-input w3-border w3-round-large" [(ngModel)]="conductor.identificacion" type="number" placeholder="Ingresar Número de Identificación">
+      <br>
+
+      <label class="w3-text-blue">Nombre</label><br>
+      <input class="w3-input w3-border w3-round-large" [(ngModel)]="conductor.nombre" type="text" placeholder="Ingresar Nombre Completo">
+      <br>
+
+      <label class="w3-text-blue">Teléfono</label><br>
+      <input class="w3-input w3-border w3-round-large" [(ngModel)]="conductor.telefono" type="tel" placeholder="Ingresar Número de Teléfono">
+      <br>
+
+      <label class="w3-text-blue">Dirección</label><br>
+      <textarea rows="2" class="w3-input w3-border w3-round-large" [(ngModel)]="conductor.direccion" placeholder="Ingresar Dirección Domiciliaria"></textarea>
+      <br>
+
+      <label class="w3-text-blue">Correo Electrónico</label><br>
+      <input class="w3-input w3-border w3-round-large" [(ngModel)]="conductor.email" type="email" placeholder="Ingresar Correo Electrónico">
+      <br>
+      <label class="w3-text-blue">Contraseña</label><br>
+      <input class="w3-input w3-border w3-round-large" [(ngModel)]="conductor.password" type="password" placeholder="Ingresar Contraseña">
+      <br>
+      <label class="w3-text-blue">Confirmar Contraseña</label><br>
+      <input class="w3-input w3-border w3-round-large" [(ngModel)]="conductor.confirmPassword" type="password" placeholder="Ingresar Nuevamente la Contraseña">
+      <br><br>
+      <button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large w3-block" style="height: 40px;" (click)="registrarConductor()">Registrate</button>
+      <br>
+      <div *ngIf="mensajeEstado" class="w3-panel w3-red w3-display-container w3-border w3-round-large">
+        <span onclick="this.parentElement.style.display='none'"
+        class="w3-button w3-large w3-display-topright">&times;</span>
+        <p>{{mensajeTexto}}.</p>
+      </div>
+      <div style="text-align: center">
+          <a class="w3-text-blue" (click)="paginaIniciar()">¿Ya tienes una cuenta? <b>Ingresa Aquí</b></a>
+      </div>
+      <br><br><br>
+    </div>
+
+  </ion-content>

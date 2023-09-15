@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+  <title>RUTE</title>
+
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+    type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css" />
+  <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet" />
+  <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+  <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+  <link href="../../css/style.css" rel="stylesheet" />
+  <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+  <link href="../../css/Chart.min.css" rel="stylesheet" />
+</head>
+
+<body class="theme-red">
+  <!-- Top Bar -->
+  <nav class="navbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="javascript:void(0);" class="bars"></a>
+        <a class="navbar-brand" href="/adminIndex">RUTAS ESCOLARES</a>
+      </div>
+    </div>
+  </nav>
+  <!-- #Top Bar -->
+  <section>
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+      <!-- User Info -->
+      <div class="user-info">
+        <div class="image">
+          <img src="../../images/user.png" width="48" height="48" alt="User" />
+        </div>
+        <div class="info-container">
+          <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Usuario en Sesion
+          </div>
+          <div class="email">Correo Electronico</div>
+          <div class="btn-group user-helper-dropdown">
+            <i class="material-icons" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="true">keyboard_arrow_down</i>
+            <ul class="dropdown-menu pull-right">
+              <li>
+                <a href="/adminPerfil"><i class="material-icons">person</i>Perfil</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href=""><i class="material-icons">input</i>Cerrar Sesión</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu">
+        <ul class="list">
+          <li class="header">OPCIONES</li>
+          <li class="active">
+            <a href="/adminIndex">
+              <i class="material-icons">home</i> <span>Inicio</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminConductores">
+              <i class="material-icons">airline_seat_recline_normal</i>
+              <span>Conductores</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminEstudiantes">
+              <i class="material-icons">face</i> <span>Estudiante</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminRepresentantes">
+              <i class="material-icons">home</i> <span>Representantes</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminVehiculos">
+              <i class="material-icons">directions_bus</i>
+              <span>Vehículos</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminRutas">
+              <i class="material-icons">swap_calls</i>
+              <span>Ruta</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="javascript:void(0);" class="menu-toggle">
+              <i class="material-icons">call_split</i>
+              <span>Asignaciones</span>
+            </a>
+            <ul class="ml-menu">
+              <li>
+                <a href="/adminRepresentanteEstudiante">
+                  Representante a Estudiante</a>
+              </li>
+              <li>
+                <a href="/adminConductorVehiculo"> Conductor a Vehículo</a>
+              </li>
+              <li>
+                <a href="/adminEstudianteVehiculo"> Estudiante a Vehículo</a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li>
+            <a href="/adminUsuarios">
+              <i class="material-icons">person</i> <span>Usuarios</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="legal">
+        <div class="copyright">
+          &copy; 2020 <a>Rutas de Transporte Escolar</a>.
+        </div>
+        
+      </div>
+    </aside>
+  </section>
+
+  <section class="content">
+
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row" style="text-align: center;">
+          <div class="col-md-3">
+            <div class="panel panel-primary">
+              <div class="panel-body">
+                <i class="material-icons" style="font-size: 110px;">airline_seat_recline_normal</i>
+                <br>
+                CONDUCTORES <span class="badge"><b id="conductores">0</b></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="panel panel-success">
+              <div class="panel-body">
+                <i class="material-icons" style="font-size: 110px;">face</i>
+                <br>
+                ESTUDIANTES <span class="badge"><b id="estudiantes">0</b></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="panel panel-info">
+              <div class="panel-body">
+                <i class="material-icons" style="font-size: 110px;">home</i>
+                <br>
+                REPRESENTANTES <span class="badge"><b id="representantes">0</b></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="panel panel-info">
+              <div class="panel-body">
+                <i class="material-icons" style="font-size: 110px;">directions_bus</i>
+                <br>
+                VEHÍCULOS <span class="badge"><b id="vehiculos">0</b></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <canvas id="myChart" style="width: 100%; height: 400px;"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+  <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+  <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+  <script src="../../plugins/node-waves/waves.js"></script>
+  <script src="../../js/admin.js"></script>
+  <script src="../../js/demo.js"></script>
+  <script src="../../js/Chart.min.js"></script>
+
+  <script>
+    buscarResumen();
+    function buscarResumen() {
+      $.get("/buscarInicioResumen").done(function (res) {
+        var datos = JSON.parse(res[0].inicio);
+        $("#conductores").html(datos.conductor);
+        $("#estudiantes").html(datos.estudiante);
+        $("#representantes").html(datos.representante);
+        $("#vehiculos").html(datos.vehiculo);
+      });
+    }
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

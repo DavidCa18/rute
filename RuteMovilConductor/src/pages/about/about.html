@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar color="celeste" style="text-align: center">
+    <ion-title>Estudiantes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <span class="w3-text-blue" style="font-weight: bold">Fecha: {{fecha}}</span><br>
+  <label class="w3-text-blue" style="font-weight: bold">Seleccionar Periodo Lectivo</label><br>
+  <select [(ngModel)]="periodo" class="w3-input w3-border w3-round-large" (ngModelChange)="obtenerEstudiantes()">
+    <option value="2019-2020">2019-2020</option>
+    <option value="2018-2019">2018-2019</option>
+    <option value="2017-2018">2017-2018</option>
+  </select>
+  <br>
+  <div>
+    <ul *ngIf="lstEstudiantes.length == 0" class="w3-ul w3-card-4 w3-hoverable w3-border w3-round-large">
+      <li class="w3-bar">
+        <img src="../../assets/imgs/lista-vacia.png" class="w3-bar-item" width="64" height="64">
+        <div class="w3-bar-item">
+          <span class="w3-large">Estudiantes</span><br>
+          <span>Lista Vacía.</span>
+        </div>
+      </li>
+    </ul>
+    <ul class="w3-ul w3-card-4 w3-hoverable w3-border w3-round-large">
+      <li *ngFor="let estudiantes of lstEstudiantes" class="w3-bar" (click)="visualizarEstudiante(estudiantes)">
+        <img src="{{estudiantes.fotoEstudiante}}" class="w3-bar-item w3-circle" width="64" height="64">
+        <div class="w3-bar-item">
+          <span class="w3-large">{{estudiantes.nombreEstudiante}}</span><br>
+          <span>{{estudiantes.barrio}}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <ion-fab *ngIf="estadoParar" bottom left>
+    <button ion-fab color="danger" (click)="pararPosicion()">
+      <ion-icon name="ios-hand"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-fab *ngIf="estadoCompartir" bottom right>
+    <button ion-fab color="celeste" (click)="gestionarPosicion()">
+      <ion-icon name="ios-share"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

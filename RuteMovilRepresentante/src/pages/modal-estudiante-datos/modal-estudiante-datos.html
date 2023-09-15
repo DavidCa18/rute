@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar color="celeste" style="text-align: center" (click)="cerrar()">
+    <ion-icon name="arrow-back" style="float: left; font-size: 25px; font-weight: bold; color: white"></ion-icon>
+    <ion-title>Datos Generales</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <table class="w3-table">
+    <tr>
+      <td colspan="2">
+        <label class="w3-text-blue" style="font-weight: bold"><u>Datos Estudiante</u></label>
+      </td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Nombre:</label></td>
+      <td><label class="w3-text-black">{{datosEstudiante.nombreEstudiante}}</label></td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Curso:</label></td>
+      <td><label class="w3-text-black">{{datosEstudiante.curso}}</label></td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Teléfono:</label></td>
+      <td><label class="w3-text-black">{{datosEstudiante.telefonoEstudiante}}</label></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <label class="w3-text-blue" style="font-weight: bold"><u>Datos Representante</u></label>
+      </td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Nombre:</label></td>
+      <td><label class="w3-text-black">{{datosEstudiante.nombreRepresentante}}</label></td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Teléfono:</label></td>
+      <td><label class="w3-text-black">{{datosEstudiante.telefonoRepresentante}}</label></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <label class="w3-text-blue" style="font-weight: bold"><u>Datos Dirección</u></label>
+      </td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Calle Principal:</label></td>
+      <td><label class="w3-text-black">{{datosEstudiante.callePrincipal}}</label></td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Calle Secundaria:</label></td>
+      <td><label class="w3-text-black">{{datosEstudiante.calleSecundaria}}</label></td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Barrio:</label></td>
+      <td><label class="w3-text-black">{{datosEstudiante.barrio}}</label></td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Zona:</label></td>
+      <td><label class="w3-text-black">{{datosEstudiante.zona}}</label></td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Número de Casa:</label></td>
+      <td><label class="w3-text-black">{{datosEstudiante.numeroCasa}}</label></td>
+    </tr>
+  </table>
+
+  <div id="mapaEstudiante" style="width: 100%; height: 50%"></div>
+
+  <br>
+  <button class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large w3-block" style="height: 35px;"
+    (click)="cerrar()">Aceptar</button>
+
+</ion-content>

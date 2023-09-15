@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+  <title>RUTE</title>
+
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+    type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css" />
+  <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet" />
+  <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+  <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+  <link href="../../css/style.css" rel="stylesheet" />
+  <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+  <link href="../../plugins/kendo-ui/css/kendo.common-nova.min.css" rel="stylesheet" />
+  <link href="../../plugins/kendo-ui/css/kendo.nova.min.css" rel="stylesheet" />
+  <link href="../../plugins/kendo-ui/css/kendo.nova.mobile.min.css" rel="stylesheet" />
+</head>
+
+<body class="theme-red">
+  <!-- Top Bar -->
+  <nav class="navbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="javascript:void(0);" class="bars"></a>
+        <a class="navbar-brand" href="/adminIndex">RUTAS ESCOLARES</a>
+      </div>
+    </div>
+  </nav>
+  <!-- #Top Bar -->
+  <section>
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+      <!-- User Info -->
+      <div class="user-info">
+        <div class="image">
+          <img src="../../images/user.png" width="48" height="48" alt="User" />
+        </div>
+        <div class="info-container">
+          <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Usuario en Sesion
+          </div>
+          <div class="email">Correo Electronico</div>
+          <div class="btn-group user-helper-dropdown">
+            <i class="material-icons" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="true">keyboard_arrow_down</i>
+            <ul class="dropdown-menu pull-right">
+              <li>
+                <a href="/adminPerfil"><i class="material-icons">person</i>Perfil</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href=""><i class="material-icons">input</i>Cerrar Sesión</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu">
+        <ul class="list">
+          <li class="header">OPCIONES</li>
+
+
+          <li>
+            <a href="/adminConductores">
+              <i class="material-icons">airline_seat_recline_normal</i>
+              <span>Conductores</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminEstudiantes">
+              <i class="material-icons">face</i> <span>Estudiante</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminRepresentantes">
+              <i class="material-icons">home</i> <span>Representantes</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminVehiculos">
+              <i class="material-icons">directions_bus</i>
+              <span>Vehículos</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/adminRutas">
+              <i class="material-icons">swap_calls</i>
+              <span>Ruta</span>
+            </a>
+          </li>
+
+          <li class="active">
+            <a href="javascript:void(0);" class="menu-toggle">
+              <i class="material-icons">call_split</i>
+              <span>Asignaciones</span>
+            </a>
+            <ul class="ml-menu">
+              <li>
+                <a href="/adminRepresentanteEstudiante">
+                  Representante a Estudiante</a>
+              </li>
+              <li>
+                <a href="/adminConductorVehiculo"> Conductor a Vehículo</a>
+              </li>
+              <li class="active">
+                <a href="/adminEstudianteVehiculo"> Estudiante a Vehículo</a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li>
+            <a href="/adminUsuarios">
+              <i class="material-icons">person</i> <span>Usuarios</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="legal">
+        <div class="copyright">
+          &copy; 2020 <a>Rutas de Transporte Escolar</a>.
+        </div>
+        
+      </div>
+    </aside>
+  </section>
+
+  <section class="content">
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>GESTION ASIGNACION REPRESENTATE - ESTUDIANTES</h2>
+          </div>
+          <div class="body">
+            <div id="grid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+  <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+  <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+  <script src="../../plugins/node-waves/waves.js"></script>
+  <script src="../../js/admin.js"></script>
+  <script src="../../js/demo.js"></script>
+  <script src="../../plugins/kendo-ui/js/kendo.all.min.js"></script>
+  <script src="../../plugins/kendo-ui/js/kendo.messages.es-EC.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var periodo = [
+        { text: "2019-2020", value: "2019-2020" },
+        { text: "2020-2021", value: "2020-2021" },
+        { text: "2018-2019", value: "2018-2019" },
+        { text: "2017-2018", value: "2017-2018" },
+        { text: "2016-2017", value: "2016-2017" },
+      ];
+      dataSource = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: "/buscarEstudianteVehiculo",
+            dataType: "json",
+            type: "GET"
+          },
+          create: {
+            url: "/guardarEstudianteVehiculo",
+            dataType: "json",
+            type: "POST"
+          },
+          parameterMap: function (options, operation) {
+            if (operation !== "read" && options.models) {
+              var datos = options.models[0];
+              return datos;
+            }
+          }
+        },
+        error: function (e) {
+          if (e.xhr.status == 404) {
+            alert("Ya existe la asignación que intenta ralizar en este momento");
+          } else {
+            alert("No se puede eliminar ya que depende de otros registros");
+          }
+        },
+        batch: true,
+        pageSize: 20,
+        schema: {
+          model: {
+            id: "idEstudianteVehiculo",
+            fields: {
+              idEstudianteVehiculo: { editable: false, nullable: true },
+              idEstudiante: { validation: { required: true } },
+              idVehiculo: { validation: { required: true } },
+              periodo: { validation: { required: true } }
+            }
+          }
+        }
+      });
+
+      $.get("/buscarVehiculoCombo").done(function (vehiculo) {
+        $.get("/buscarEstudianteCombo").done(function (estudiante) {
+          $("#grid").kendoGrid({
+            dataSource: dataSource,
+            pageable: true,
+            height: 550,
+            toolbar: ["create"],
+            columns: [
+
+              { field: "idEstudiante", title: "Estudiante", values: estudiante, width: "120px" },
+              { field: "idVehiculo", title: "Vehículo", values: vehiculo, width: "120px" },
+              { field: "periodo", title: "Periodo", values: periodo, width: "120px" },
+              {
+                command: { text: "ELIMINAR", click: eliminarAsignacion }, title: "&nbsp;", width: "100px"
+              },
+            ],
+            editable: "popup",
+            edit: function (e) {
+              e.container.kendoWindow("title", "Gestión Estudiante-Vehículo");
+            }
+          });
+        });
+      });
+    });
+
+    function eliminarAsignacion(e) {
+      e.preventDefault();
+      var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+
+      $.ajax({
+        type: "POST",
+        url: "/eliminarEstudianteVehiculo",
+        data: { idEstudianteVehiculo: dataItem.idEstudianteVehiculo },
+        success: function (responseText) {
+          alert('La asignación se ha eliminado exitosamente');
+          location.reload();
+        }
+      }).fail(function (xhr, ajaxOptions, thrownError) {
+        console.log('Error al eliminar asignacion', 'Gestión Estudiante-Vehículo');
+      });
+    }
+  </script>
+</body>
+
+</html>

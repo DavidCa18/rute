@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="celeste" style="text-align: center">
+    <ion-title>Historial</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <table class="w3-table">
+    <tr>
+      <td colspan="2" style="text-align: center">
+        <img src="../../assets/imgs/representante.png" alt="representante">
+      </td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Nombre:</label></td>
+      <td><label class="w3-text-black">{{datos.nombre}}</label></td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Identificación:</label></td>
+      <td><label class="w3-text-black">{{datos.identificacion}}</label></td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Dirección:</label></td>
+      <td><label class="w3-text-black">{{datos.direccion}}</label></td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Correo Electrónico:</label></td>
+      <td><label class="w3-text-black">{{datos.email}}</label></td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Teléfono:</label></td>
+      <td><label class="w3-text-black">{{datos.telefono}}</label></td>
+    </tr>
+    <tr>
+      <td><label class="w3-text-blue" style="font-weight: bold">Rol:</label></td>
+      <td><label class="w3-text-black">{{datos.rol}}</label></td>
+    </tr>
+  </table>
+</ion-content>
